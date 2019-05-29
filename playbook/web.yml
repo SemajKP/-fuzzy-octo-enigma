@@ -1,0 +1,15 @@
+---
+
+- hosts: ksouthall@16.83.62.83
+  remote_user: ksouthall
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: Install Apache
+    apt:
+      name: apache2
+      update_cache: yes
+  - name: Copying the demo file
+    template: src=/etc/ansible/index.html dest=/var/www/html
+              owner=www-data group=www-data mode=0644
